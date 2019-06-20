@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+*{
+  font-family: 'Open Sans', sans-serif;
+}
+body{
+  font-size: 16px;
+}
+
+.header, footer{
+	background-color: #940822;
+	color: #fff;
+	height: 40px;
+	width: 100%;
+}
+.header ul{
+	list-style: none;
+	float: right;
+	font-size: 18px;
+	margin: 0;
+	padding: 0;
+	padding-top: 5px;
+}
+.header ul li {
+	display: inline-block;
+}
+.header ul li:after {
+	content: ' | ';
+}
+.header ul li:last-child:after {
+	content: '';
+}
+.header ul li a{
+	color: #fff;
+	text-decoration: none;
+}
+
+.login{
+	overflow: hidden;
+}
+
+.img-inline{padding-right: 10px;}
+
+footer{
+	bottom: 0px;
+	height: 30px;
+	left: 0px;
+	position: fixed;
+	z-index: 100000;
+}
+
+.sin-padding-right{
+	padding-right: 0;
+}
+.bloque{display: block;}
+.no-resize{resize: none;}
+.text-vertical{writing-mode: vertical-rl;
+text-orientation: upright;}
+
+/*Checkboxes*/
+.funkyradio div {
+  clear: both;
+  overflow: hidden;
+}
+
+/*.funkyradio label {
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid #D1D3D4;
+  font-weight: normal; 
+  for change not estadistica
+}*/
+
+.funkyradio label:not(.estadistica_label){
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid #D1D3D4;
+  font-weight: normal;
+}
+
+.funkyradio input[type="radio"]:empty,
+.funkyradio input[type="checkbox"]:empty {
+  display: none;
+}
+
+.funkyradio input[type="radio"]:empty ~ label,
+.funkyradio input[type="checkbox"]:empty ~ label {
+  position: relative;
+  line-height: 2.5em;
+  text-indent: 3.25em;
+  /*margin-top: 2em;*/
+  margin-bottom: 5px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.funkyradio input[type="radio"]:empty ~ label:before,
+.funkyradio input[type="checkbox"]:empty ~ label:before {
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+  width: 2.5em;
+  background: #D1D3D4;
+  border-radius: 3px 0 0 3px;
+}
+
+.funkyradio input[type="radio"]:hover:not(:checked) ~ label,
+.funkyradio input[type="checkbox"]:hover:not(:checked) ~ label {
+  color: #888;
+}
+
+.funkyradio input[type="radio"]:hover:not(:checked) ~ label:before,
+.funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
+  content: '\2714';
+  text-indent: .9em;
+  color: #C2C2C2;
+}
+
+.funkyradio input[type="radio"]:checked ~ label,
+.funkyradio input[type="checkbox"]:checked ~ label {
+  color: #777;
+}
+
+.funkyradio input[type="radio"]:checked ~ label:before,
+.funkyradio input[type="checkbox"]:checked ~ label:before {
+  content: '\2714';
+  text-indent: .9em;
+  color: #333;
+  background-color: #ccc;
+}
+
+.funkyradio input[type="radio"]:focus ~ label:before,
+.funkyradio input[type="checkbox"]:focus ~ label:before {
+  box-shadow: 0 0 0 3px #999;
+}
+
+.funkyradio-danger input[type="radio"]:checked ~ label:before,
+.funkyradio-danger input[type="checkbox"]:checked ~ label:before {
+  color: #fff;
+  background-color: #d9534f;
+}
+
+/*.lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+}*/
+.bg-light {
+    background-color: #f8f9fa!important;
+}
+.border          { border: 1px solid #e9ecef!important; }
+.border-0        { border: 0 !important; }
+.border-top-0    { border-top: 0 !important; }
+.border-right-0  { border-right: 0 !important; }
+.border-bottom-0 { border-bottom: 0 !important; }
+.border-left-0   { border-left: 0 !important; }
+
+.float-right {
+    float: right!important;
+}
+.float-left {
+    float: left!important;
+}
+
+.pregunta{
+    background-color: #EEEEEE ;
+    display: inline-block;
+    padding: 0px 5px 8px 15px; 
+    margin: 0px 0px 15px 0px;
+    font-weight: bold;
+}
+
+.form-controlado {
+  padding: 0.5rem 0.75rem;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  color: #495057;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1.3px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+
+
+
+.funkyradio-success input[type="radio"]:disabled ~ label:before,
+.funkyradio-success input[type="checkbox"]:disabled ~ label:before {
+  color: #fff;
+  background-color: #5cb85c;
+}
+
+.textInputs{
+  display: inline-block;
+}
