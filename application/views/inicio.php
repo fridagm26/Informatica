@@ -1,4 +1,5 @@
-<?php $this->load->view('Global/header'); ?>
+<!-- MENU MENU MENU MENU MENU -->
+  <?php $this->load->view('Global/header'); ?>
   <?php $this->load->view('Global/menu'); ?>
   <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
 	<style>
@@ -12,8 +13,24 @@
        <section class="content">
 			 	<h1>Perfiles</h1>
        	<div class="row">
+<<<<<<< HEAD
 				
         </div>
+=======
+       		<div class="clear">
+       			<br>
+       			<br>
+       			<br>
+       			<br>
+       			<br>
+       			<br>
+       			<br>
+       			<br>
+       		</div>
+            
+            
+         </div>
+>>>>>>> parent of 3099503... holis
        </section>
   </div>
   <div class="control-sidebar-bg"></div>
