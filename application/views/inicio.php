@@ -1,4 +1,5 @@
-<?php $this->load->view('Global/header'); ?>
+<!-- MENU MENU MENU MENU MENU -->
+  <?php $this->load->view('Global/header'); ?>
   <?php $this->load->view('Global/menu'); ?>
   <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
 
@@ -15,7 +16,9 @@
        			<br>
        			<br>
        			<br>
-       		</div>            
+       		</div>
+            
+            
          </div>
        </section>
   </div>
