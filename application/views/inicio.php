@@ -2,11 +2,21 @@
   <?php $this->load->view('Global/header'); ?>
   <?php $this->load->view('Global/menu'); ?>
   <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
+	<style>
+		.botones{
+			
+		}
+	</style>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
        <section class="content">
+			 	<h1>Perfiles</h1>
        	<div class="row">
+<<<<<<< HEAD
+				
+        </div>
+=======
        		<div class="clear">
        			<br>
        			<br>
@@ -20,6 +30,7 @@
             
             
          </div>
+>>>>>>> parent of 3099503... holis
        </section>
   </div>
   <div class="control-sidebar-bg"></div>
