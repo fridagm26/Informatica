@@ -13,10 +13,8 @@
        <section class="content">
 			 	<h1>Perfiles</h1>
        	<div class="row">
-<<<<<<< HEAD
 				
         </div>
-=======
        		<div class="clear">
        			<br>
        			<br>
@@ -30,7 +28,6 @@
             
             
          </div>
->>>>>>> parent of 3099503... holis
        </section>
   </div>
   <div class="control-sidebar-bg"></div>

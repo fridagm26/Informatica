@@ -13,7 +13,9 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">CATALOGOS</li>
           <!--Menu-->
-          <li><a href="<?php echo base_url();?>index.php/Inicio/formulario"><i class="fa fa-file"></i> <span>Titulo Electronico</span></a></li>
+          <?php foreach($modulos as $modulo){ ?>
+          <li><a href="<?php echo base_url($modulo->ruta);?>"><i class="fa fa-file"></i><?php echo $modulo->nombre ?></a></li>
+          <?php } ?>
       	 
       </ul>
     </section>
