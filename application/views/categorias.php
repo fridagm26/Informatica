@@ -8,25 +8,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Añadir Laboratorio</h5>
+                <h5 class="modal-title">Añadir Categoria</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="newlab" action="<?php echo base_url() ?>index.php/Laboratorios/agregarLaboratorio" method="POST">
+                <form id="newlab" action="<?php echo base_url() ?>index.php/Categorias/agregarCategoria" method="POST">
                     <div class="form-group">
                         <label>Descripción</label>
-                        <input type="text" class="form-control" name="descripcion" placeholder="Ingrese Descripción">
+                        <input type="text" class="form-control form-control-lg" name="descripcion" placeholder="Ingrese Descripción">
                         <small class="form-text text-muted">Escriba una breve descripcion del laboratorio.</small>
-                    </div>
-                    <div class="form-group">
-                        <label>Ubicacion</label>
-                        <input type="text" class="form-control" name="ubicacion" placeholder="Ingrese Ubicacion">
-                    </div>
-                    <div class="form-group">
-                        <label>Capacidad</label>
-                        <input type="text" class="form-control" name="capacidad" placeholder="Ingrese Capacidad">
                     </div>
                     <div class="form-group">
                         <label>Usuario</label>

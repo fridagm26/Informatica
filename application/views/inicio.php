@@ -11,7 +11,7 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
        <section class="content">
-			 	<h1>Perfiles</h1>
+			 	<h1>Inicio</h1>
        	<div class="row">
 				
         </div>
