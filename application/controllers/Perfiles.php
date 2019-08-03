@@ -30,8 +30,6 @@ class Perfiles extends CI_Controller {
         $data['descripcion']=$this->input->post('descripcionModificar');
         $id=$this->input->post('idPerfil');
         echo json_encode( $this->Perfiles_model->modificarPerfil($data,$id) );
-
-
     }
 
     public function modificarEstado(){

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
- 
+ <style>
+
+ </style>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title> Titulo | Electronico</title>
+  <title> Almacen Informatica</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -20,12 +22,15 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?php echo base_url('assets/css/_all-skins.min.css'); ?>">
   
-
-
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
+
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  
+
 </head>
 <body class="hold-transition skin-red-light sidebar-mini">
 
@@ -35,9 +40,9 @@
     <!-- Logo -->
     <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>TE</b></span>
+        <span class="logo-mini"><b>AI</b></span>
       <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Titulo electronico</b></span>
+        <span class="logo-lg"><b>Almacen Informatica</b></span>
 
     </a>
     <!-- Header Navbar: style can be found in header.less -->
