@@ -48,7 +48,6 @@
 				</table>
 				<!-- Termina tabla -->
 				<!-- <div class="botones"> -->
-					<button style="margin-top: 20px" type="button" class="btn btn-primary col-md-2" onclick="añadirCategoria()">Añadir</button>
 				<!-- </div> -->
         </div>
        </section>

@@ -28,10 +28,6 @@
                         <label>Capacidad</label>
                         <input type="text" class="form-control" name="capacidad" placeholder="Ingrese Capacidad">
                     </div>
-                    <div class="form-group">
-                        <label>Usuario</label>
-                        <input type="text" class="form-control" name="idUsuario" placeholder="Usuario" value="5">
-                    </div>
                     <input type="submit" value="Guardar" class="btn btn-primary" />
                 </form>
             </div>
@@ -65,10 +61,6 @@
                     <div class="form-group">
                         <label>Capacidad</label>
                         <input type="text" class="form-control" name="capacidadModificar" placeholder="Ingrese Capacidad">
-                    </div>
-                    <div class="form-group">
-                        <label>Usuario</label>
-                        <input type="text" class="form-control" name="idUsuarioModificar" placeholder="Usuario" value="5">
                     </div>
                     <input type="submit" value="Guardar" class="btn btn-primary" />
                 </form>

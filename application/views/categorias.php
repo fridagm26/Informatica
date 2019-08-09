@@ -20,14 +20,6 @@
                         <input type="text" class="form-control form-control-lg" name="descripcion" placeholder="Ingrese Descripción">
                         <small class="form-text text-muted">Escriba una breve descripcion de la categoria.</small>
                     </div>
-                    <div class="form-group">
-                        <label>Usuario</label>
-                        <input type="text" class="form-control" name="idUsuario" placeholder="Usuario" value="5">
-                    </div>
-                    <div class="form-group">
-                        <label>Fecha de registro</label>
-                        <input type="text" class="form-control" name="fecha" placeholder="fecha" value="<?php echo date('Y-m-d H:i:s', time());?>">
-                    </div>
                     <input type="submit" value="Guardar" class="btn btn-primary" />
                 </form>
             </div>
