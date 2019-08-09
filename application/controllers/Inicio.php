@@ -1,15 +1,15 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+/*defined('BASEPATH') OR exit('No direct script access allowed');*/
 
 class Inicio extends CI_Controller {
 
-	public function __construct(){
+	function __construct(){
 		parent::__construct();
 		$this->load->model('Modulos_model');
 	}
 	public function index()
 	{
-		$data['modulos'] = $this->Modulos_model->obtenermodulos();
+		$data['modulos'] = $this->Modulos_model->obtenerModulos();
     	$this->load->view('inicio',$data);
-  }
+  	}	
 }

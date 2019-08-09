@@ -25,7 +25,7 @@ class Lab_modelo extends CI_Model {
     }
 
     public function modificarLaboratorio($data,$id){
-        $perfil=array(
+        $laboratorio=array(
             'descripcion'=>$data['descripcion'],
             'ubicacion'=>$data['ubicacion'],
             'capacidad'=>$data['capacidad']

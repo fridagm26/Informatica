@@ -15,7 +15,7 @@ class Categorias_modelo extends CI_Model {
     }
 
     public function agregarCategoria($data){
-        $laboratorio=array(
+        $categoria=array(
             'descripcion'=>$data['descripcion']
         );
         $this->db->insert('categorias',$categoria);
@@ -23,7 +23,7 @@ class Categorias_modelo extends CI_Model {
     }
 
     public function modificarCategoria($data,$id){
-        $perfil=array(
+        $categoria=array(
             'descripcion'=>$data['descripcion']
         );
         $this->db->where('id',$id)->update('categorias',$categoria);

@@ -14,11 +14,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="newlab" action="<?php echo base_url() ?>index.php/Categorias/agregarCategoria" method="POST">
+                <form id="newcat" action="<?php echo base_url() ?>index.php/Categorias/agregarCategoria" method="POST">
                     <div class="form-group">
                         <label>Descripción</label>
                         <input type="text" class="form-control form-control-lg" name="descripcion" placeholder="Ingrese Descripción">
-                        <small class="form-text text-muted">Escriba una breve descripcion del laboratorio.</small>
+                        <small class="form-text text-muted">Escriba una breve descripcion de la categoria.</small>
                     </div>
                     <div class="form-group">
                         <label>Usuario</label>
@@ -38,25 +38,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modificar Laboratorio</h5>
+                <h5 class="modal-title">Modificar Categoria</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="modificarLaboratorio" action="<?php echo base_url() ?>index.php/Laboratorios/modificarLaboratorio" method="POST">
+                <form id="modificarCategoria" action="<?php echo base_url() ?>index.php/Categorias/modificarCategoria" method="POST">
                     <div class="form-group">
                         <label>Descripción</label>
                         <input type="text" class="form-control" name="descripcionModificar" placeholder="Ingrese Descripción">
-                        <small class="form-text text-muted">Escriba una breve descripcion del laboratorio.</small>
-                    </div>
-                    <div class="form-group">
-                        <label>Ubicacion</label>
-                        <input type="text" class="form-control" name="ubicacionModificar" placeholder="Ingrese Ubicacion">
-                    </div>
-                    <div class="form-group">
-                        <label>Capacidad</label>
-                        <input type="text" class="form-control" name="capacidadModificar" placeholder="Ingrese Capacidad">
+                        <small class="form-text text-muted">Escriba una breve descripcion de la categoria.</small>
                     </div>
                     <div class="form-group">
                         <label>Usuario</label>
@@ -76,41 +68,39 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
        <section class="content">
-			 	<h1>Laboratorios</h1>
+			 	<h1>Categorias</h1>
        	<div class="row">
 				 <!-- Empieza tabla -->
-				 <table class="table ta" id="tablaLaboratorios">
+				 <table class="table ta" id="tablaCategorias">
 					<thead>
 						<tr>
                             <th scope="col">Descripción</th>
-                            <th scope="col">Ubicacion</th>
-                            <th scope="col">Capacidad</th>
 							<th scope="col">Estado</th>
                             <th scope="col">Acción</th>
 						</tr>
 					</thead>
 					<tbody>
+                    <div id="recargar">
                         <?php 
-                            foreach($laboratorios as $laboratorio){
-                                $estado='<button type="button" onclick="estadoLaboratorio(\''.$laboratorio->id.'\',\''.$laboratorio->estado.'\')" class="btn btn-success">Activar</button>';
-                                if($laboratorio->estado==1){
-                                    $estado='<button type="button" onclick="estadoLaboratorio(\''.$laboratorio->id.'\',\''.$laboratorio->estado.'\')" class="btn btn-danger">Desactivar</button>';
+                            foreach($categorias as $categoria){
+                                $estado='<button type="button" onclick="estadoCategoria(\''.$categoria->id.'\',\''.$categoria->estado.'\')" class="btn btn-success">Activar</button>';
+                                if($categoria->estado==1){
+                                    $estado='<button type="button" onclick="estadoCategoria(\''.$categoria->id.'\',\''.$categoria->estado.'\')" class="btn btn-danger">Desactivar</button>';
                                 }
                                 echo 
                                     '<tr>
-                                        <td>'.$laboratorio->ubicacion.'</td>
-                                        <td>'.$laboratorio->descripcion.'</td>
-                                        <td>'.$laboratorio->capacidad.'</td>
+                                        <td>'.$categoria->descripcion.'</td>
                                         <td>'.$estado.'</td>
-                                        <td><button type="button" onclick="modificarLaboratorio(\''.$laboratorio->ubicacion.'\', \''.$laboratorio->descripcion.'\', \''.$laboratorio->capacidad.'\', '.$laboratorio->id.')" class="btn btn-primary">Modificar</button></td>
+                                        <td><button type="button" onclick="modificarCategoria(\''.$categoria->descripcion.'\', '.$categoria->id.')" class="btn btn-primary">Modificar</button></td>
                                     </tr>';
                             }
                         ?>
+                    </div>    
 					</tbody>
 				</table>
 				<!-- Termina tabla -->
 				<!-- <div class="botones"> -->
-					<button type="button" class="btn btn-primary col-md-2" onclick="añadirLaboratorio()">Añadir</button>
+					<button type="button" class="btn btn-primary col-md-2" onclick="añadirCategoria()">Añadir</button>
 				<!-- </div> -->
         </div>
        </section>
@@ -120,36 +110,32 @@
 
 <script>
    /*  $('#profileTable').DataTable(); -----PARA LA TABLA*/ 
-    function añadirLaboratorio(){
+    function añadirCategoria(){
         $("#modal-añadir").modal('show');
         $('input[name="descripcion"]').val('');
-        $('input[name="ubicacion"]').val('');
-        $('input[name="capacidad"]').val('');
     }
 
-    $('#newlab').submit(function() {
-        if($('input[name="descripcion"]').val() !== "" && $('input[name="ubicacion"]').val() !== "" && $('input[name="capacidad"]').val() !== "") {
+    $('#newcat').submit(function() {
+        if($('input[name="descripcion"]').val() !== "") {
             $.ajax({
-                url: 'Laboratorios/agregarLaboratorio', 
+                url: 'Categorias/agregarCategoria', 
                 type: "post",
-                data: $('#newlab').serialize(),
+                data: $('#newcat').serialize(),
                 success: function( response ) {
                     response = JSON.parse(response);
-                    let estadoBoton= '<button type="button" onclick="estadoLaboratorio(\''+response.id+'\',\''+response.estado+'\')" class="btn btn-success">Activar</button>';
-                    if(response.estatus==1){
-                        estadoBoton='<button type="button" onclick="estadoLaboratorio(\''+response.id+'\',\''+response.estado+'\')" class="btn btn-danger">Desactivar</button>';
+                    let estadoBoton= '<button type="button" onclick="estadoCategoria(\''+response.id+'\',\''+response.estado+'\')" class="btn btn-success">Activar</button>';
+                    if(response.estado==1){
+                        estadoBoton='<button type="button" onclick="estadoCategoria(\''+response.id+'\',\''+response.estado+'\')" class="btn btn-danger">Desactivar</button>';
                     }
-                    $('#tablaLaboratorios tbody').prepend(
+                    $('#tablaCategorias tbody').prepend(
                         '<tr>'+
-                            '<td>'+response.ubicacion+'</td>'+
                             '<td>'+response.descripcion+'</td>'+
-                            '<td>'+response.capacidad+'</td>'+
                             '<td>'+estadoBoton+'</td>'+
-                            '<td><button type="button" onclick="modificarLaboratorio(\''+response.ubicacion+'\', \''+response.descripcion+'\', \''+response.capacidad+'\', '+response.id+')" class="btn btn-primary">Modificar</button></td>'+
+                            '<td><button type="button" onclick="modificarCategoria(\''+response.descripcion+'\', '+response.id+')" class="btn btn-primary">Modificar</button></td>'+
                         '</tr>'
                     );
                     $("#modal-añadir").modal('hide');
-                    alert("Se ha guardado el laboratorio");
+                    alert("Se ha guardado la categoria");
                 }
             });
         }
@@ -159,24 +145,22 @@
         return false;
     });
     
-    var laboratorioModificando = 0;
-    function modificarLaboratorio(ubicacion, descripcion, capacidad, id) {
-        $('input[name="ubicacionModificar"]').val( ubicacion );
+    var categoriaModificando = 0;
+    function modificarCategoria(descripcion, id) {
         $('input[name="descripcionModificar"]').val( descripcion );
-        $('input[name="capacidadModificar"]').val( capacidad );
-        laboratorioModificando = id;
+        categoriaModificando = id;
         $("#modal-modificar").modal('show');
     }
 
-    $('#modificarLaboratorio').submit(function() {
-        if($('input[name="ubicacionModificar"]').val() !== "" && $('input[name="descripcionModificar"]').val() !== "" && $('input[name="capacidadModificar"]').val() !== "") {
+    $('#modificarCategoria').submit(function() {
+        if($('input[name="descripcionModificar"]').val() !== "") {
             $.ajax({
-                url: 'Laboratorios/modificarLaboratorio', 
+                url: 'Categorias/modificarCategoria', 
                 type: "post",
-                data: $('#modificarLaboratorio').serialize()+"&idLaboratorio="+laboratorioModificando,
+                data: $('#modificarCategoria').serialize()+"&idCategoria="+categoriaModificando,
                 success: function( response ) {
                     if(response == 1) {
-                        alert("Se ha modificado correctamente el laboratorio.");
+                        alert("Se ha modificado correctamente la categoria.");
                         $("#modal-modificar").modal('hide');
                     }
                     else {
@@ -192,17 +176,17 @@
     });
 
     var idEstado = 0;
-    var estadoLaboratorio = 0;    
-    function estadoLaboratorio(id,estado){
+    var estatusCategoria = 0;    
+    function estadoCategoria(id,estado){
         idEstado = id;
-        estadoLaboratorio = estado;
+        estatusCategoria = estado;
         console.log(idEstado);
-        console.log(estadoLaboratorio);
+        console.log(estatusCategoria);
 
         $.ajax({
-                url: 'Laboratorios/modificarEstado', 
+                url: 'Categorias/modificarEstado', 
                 type: "post",
-                data: {idEstado:idEstado, estadoLaboratorio:estadoLaboratorio},
+                data: {idEstado:idEstado, estatusCategoria:estatusCategoria},
                 success: function( response ) {
                     if(response == 1) {
                         alert("Se ha modificado correctamente el estado.");

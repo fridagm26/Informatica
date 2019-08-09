@@ -144,7 +144,7 @@
                 success: function( response ) {
                     response = JSON.parse(response);
                     let estadoBoton= '<button type="button" onclick="estadoLaboratorio(\''+response.id+'\',\''+response.estado+'\')" class="btn btn-success">Activar</button>';
-                    if(response.estatus==1){
+                    if(response.estado==1){
                         estadoBoton='<button type="button" onclick="estadoLaboratorio(\''+response.id+'\',\''+response.estado+'\')" class="btn btn-danger">Desactivar</button>';
                     }
                     $('#tablaLaboratorios tbody').prepend(
@@ -200,17 +200,17 @@
     });
 
     var idEstado = 0;
-    var estadoLaboratorio = 0;    
+    var estatusLaboratorio = 0;    
     function estadoLaboratorio(id,estado){
         idEstado = id;
-        estadoLaboratorio = estado;
+        estatusLaboratorio = estado;
         console.log(idEstado);
-        console.log(estadoLaboratorio);
+        console.log(estatusLaboratorio);
 
         $.ajax({
                 url: 'Laboratorios/modificarEstado', 
                 type: "post",
-                data: {idEstado:idEstado, estadoLaboratorio:estadoLaboratorio},
+                data: {idEstado:idEstado, estatusLaboratorio:estatusLaboratorio},
                 success: function( response ) {
                     if(response == 1) {
                         alert("Se ha modificado correctamente el estado.");
