@@ -12,7 +12,9 @@
                 <h1 class="text-justify">Equipos</h1>
             </blockquote>
             </div>
+
             <div class="row">
+            <div class="box box-primary">
                 <div class="clear">
                 <!-- Modal Agregar-->
                     <div class="modal fade" id="modal-agregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -59,14 +61,13 @@
                         </table>
                         <button type="button" class="btn btn-primary" onclick="agregarEquipo()">Añadir</button>
                 </div>
+                </div>
             </div>
         </div>
        </section>
-
   </div>
   <div class="control-sidebar-bg"></div>
 </div>
-
 <script>
 
 </script>
