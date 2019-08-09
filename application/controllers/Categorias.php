@@ -18,14 +18,16 @@ class Categorias extends CI_Controller {
 
     public function agregarCategoria(){
         $data['descripcion']=$this->input->post('descripcion');
-        $idCategoria = $this->Categoria_modelo->agregarCategoria($data);
-        echo json_encode( $this->Categoria_modelo->mostrarCategoria($idCategoria) );
+        $data['id_usuario']=$this->input->post('idUsuario');
+        $idCategoria = $this->Categorias_modelo->agregarCategoria($data);
+        echo json_encode( $this->Categorias_modelo->mostrarCategoria($idCategoria) );
     }
 
     public function modificarCategoria(){
         $data['descripcion']=$this->input->post('descripcionModificar');
+        $data['id_usuario']=$this->input->post('idUsuarioModificar');
         $id=$this->input->post('idCategoria');
-        echo json_encode( $this->Categoria_modelo->modificarCategoria($data,$id) );
+        echo json_encode( $this->Categorias_modelo->modificarCategoria($data,$id) );
 
 
     }
@@ -35,11 +37,11 @@ class Categorias extends CI_Controller {
         $estado=$this->input->post('estatusCategoria');
         if($estado == 1){
             $num = 0;
-            echo json_encode($this->Categoria_modelo->modificarEstado($id,$num));
+            echo json_encode($this->Categorias_modelo->modificarEstado($id,$num));
         }
         else{
             $num = 1 ;
-            echo json_encode($this->Categoria_modelo->modificarEstado($id,$num));
+            echo json_encode($this->Categorias_modelo->modificarEstado($id,$num));
         }
     }
 }
