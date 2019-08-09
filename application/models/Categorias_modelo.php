@@ -16,7 +16,8 @@ class Categorias_modelo extends CI_Model {
 
     public function agregarCategoria($data){
         $categoria=array(
-            'descripcion'=>$data['descripcion']
+            'descripcion'=>$data['descripcion'],
+            'fecha'=>$data['fecha_registro'] 
         );
         $this->db->insert('categorias',$categoria);
         return $this->db->insert_id();

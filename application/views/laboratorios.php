@@ -83,12 +83,24 @@
 <!-- MODAL -->
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-       <section class="content">
-			 	<h1>Laboratorios</h1>
+  <section class="content py-2 text-xs-center">
+        <div class="container-fluid">
+            <div class="row">
+                <blockquote style=" border-left: 5px solid #264d78;">
+                    <h1 class="text-justify">Laboratorios</h1>
+                </blockquote>
+                <div class="form-group row">
+                    <div class="col-lg-3">
+                        <input type="search" class="form-control" placeholder="Buscar">
+                    </div>
+                </div>
+            </div>
        	<div class="row">
+           <div class="box box-primary">
+                    <div class="clear">
 				 <!-- Empieza tabla -->
-				 <table class="table ta" id="tablaLaboratorios">
-					<thead>
+				 <table class="table table-striped no-margin" style="width:100%" id="tablaLaboratorios">
+					<thead class="thead-dark">
 						<tr>
                             <th scope="col">Descripción</th>
                             <th scope="col">Ubicacion</th>
@@ -118,7 +130,7 @@
 				</table>
 				<!-- Termina tabla -->
 				<!-- <div class="botones"> -->
-					<button type="button" class="btn btn-primary col-md-2" onclick="añadirLaboratorio()">Añadir</button>
+					<button style="margin-top: 20px" type="button" class="btn btn-primary col-md-2" onclick="añadirLaboratorio()">Añadir</button>
 				<!-- </div> -->
         </div>
        </section>
