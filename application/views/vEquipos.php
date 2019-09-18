@@ -11,6 +11,11 @@
             <blockquote style=" border-left: 5px solid #264d78;">
                 <h1 class="text-justify">Equipos</h1>
             </blockquote>
+            <div class="form-group row">
+                    <div class="col-lg-3">
+                        <input type="search" class="form-control" placeholder="Buscar">
+                    </div>
+                </div>
             </div>
 
             <div class="row">
@@ -74,3 +79,4 @@
 <?php $this->load->view('Global/footer')?>
 
 <script src="<?php echo base_url('assets/js/header.js'); ?>"></script>
+

@@ -17,9 +17,15 @@
         <li class="header">Menu de navegación</li>
           <!--Menu-->
           <?php foreach($modulos as $modulo){ ?>
-          <li><a href="<?php echo base_url($modulo->ruta);?>"><i class="fa fa-file"></i><?php echo $modulo->nombre ?></a></li>
+          <li style="border-top: 1px solid #264d78;"><a href="<?php echo base_url($modulo->ruta);?>"><i class="fa fa-file"></i><?php echo $modulo->nombre ?></a></li>
           <?php } ?>
       	 
+          <li style="border-top: 1px solid #264d78;" >
+            <a href="<?php echo base_url();?>index.php/cLogin/salir">
+              <i class="fa fa-power-off"></i> 
+              <span>Salir</span>
+            </a>
+          </li>
       </ul>
     </section>
     <!-- /.sidebar -->
