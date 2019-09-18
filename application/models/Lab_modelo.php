@@ -15,10 +15,12 @@ class Lab_modelo extends CI_Model {
     }
 
     public function agregarLaboratorio($data){
+        $fecha_registro=date('Y-m-d H:i:s', time());
         $laboratorio=array(
             'descripcion'=>$data['descripcion'],
             'ubicacion'=>$data['ubicacion'],
-            'capacidad'=>$data['capacidad']
+            'capacidad'=>$data['capacidad'],
+            'fecha_registro'=>$fecha_registro
         );
         $this->db->insert('laboratorios',$laboratorio);
         return $this->db->insert_id();

@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Categorias extends CI_Controller {
-
+    
 	public function __construct(){
         parent::__construct();
         $this->load->model('Modulos_model');
@@ -19,6 +19,7 @@ class Categorias extends CI_Controller {
     public function agregarCategoria(){
         $data['descripcion']=$this->input->post('descripcion');
         $data['id_usuario']=$this->input->post('idUsuario');
+        $data['fecha_registro']=$this->input->post('fecha_registro');
         $idCategoria = $this->Categorias_modelo->agregarCategoria($data);
         echo json_encode( $this->Categorias_modelo->mostrarCategoria($idCategoria) );
     }

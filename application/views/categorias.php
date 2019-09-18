@@ -20,10 +20,6 @@
                         <input type="text" class="form-control form-control-lg" name="descripcion" placeholder="Ingrese Descripción">
                         <small class="form-text text-muted">Escriba una breve descripcion de la categoria.</small>
                     </div>
-                    <div class="form-group">
-                        <label>Usuario</label>
-                        <input type="text" class="form-control" name="idUsuario" placeholder="Usuario" value="5">
-                    </div>
                     <input type="submit" value="Guardar" class="btn btn-primary" />
                 </form>
             </div>
@@ -53,6 +49,7 @@
                     <div class="form-group">
                         <label>Usuario</label>
                         <input type="text" class="form-control" name="idUsuarioModificar" placeholder="Usuario" value="5">
+                        
                     </div>
                     <input type="submit" value="Guardar" class="btn btn-primary" />
                 </form>
@@ -67,12 +64,24 @@
 <!-- MODAL -->
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-       <section class="content">
-			 	<h1>Categorias</h1>
+  <section class="content py-2 text-xs-center">
+        <div class="container-fluid">
+            <div class="row">
+                <blockquote style=" border-left: 5px solid #264d78;">
+                    <h1 class="text-justify">Categorias</h1>
+                </blockquote>
+                <div class="form-group row">
+                    <div class="col-lg-3">
+                        <input type="search" class="form-control" placeholder="Buscar">
+                    </div>
+                </div>
+            </div>
        	<div class="row">
+           <div class="box box-primary">
+                    <div class="clear">
 				 <!-- Empieza tabla -->
-				 <table class="table ta" id="tablaCategorias">
-					<thead>
+				 <table class="table table-striped no-margin" style="width:100%" id="tablaCategorias">
+					<thead class="thead-dark">
 						<tr>
                             <th scope="col">Descripción</th>
 							<th scope="col">Estado</th>
@@ -80,7 +89,6 @@
 						</tr>
 					</thead>
 					<tbody>
-                    <div id="recargar">
                         <?php 
                             foreach($categorias as $categoria){
                                 $estado='<button type="button" onclick="estadoCategoria(\''.$categoria->id.'\',\''.$categoria->estado.'\')" class="btn btn-success">Activar</button>';
@@ -95,12 +103,11 @@
                                     </tr>';
                             }
                         ?>
-                    </div>    
 					</tbody>
 				</table>
 				<!-- Termina tabla -->
 				<!-- <div class="botones"> -->
-					<button type="button" class="btn btn-primary col-md-2" onclick="añadirCategoria()">Añadir</button>
+					<button style="margin-top: 20px" type="button" class="btn btn-primary col-md-2" onclick="añadirCategoria()">Añadir</button>
 				<!-- </div> -->
         </div>
        </section>
