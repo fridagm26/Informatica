@@ -12,6 +12,6 @@ class Prestamos_modelo extends CI_Model {
 	
 	//ACABA VAN LAS FUNCIONES
 	public function mostrarPrestamos(){
-        return $this->db->get('prestamos')->result();    
+        return $this->db->get('prestamos')->result();
     }
 }
