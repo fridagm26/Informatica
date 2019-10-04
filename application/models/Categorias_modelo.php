@@ -1,45 +1,50 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * 
- */
-class Categorias_modelo extends CI_Model {
-	
-	public function __construct() {
-        parent::__construct();
-        $this->load->database();
+
+class Categorias_modelo extends CI_Model{
+
+	function obtenerCategoriasPorEstado($estatus){
+		if($estatus == 0 || $estatus == 1)
+			$this->db->where('estado', $estatus);
+		$resultado = $this->db->get('categorias')->result();
+		return $resultado;
 	}
 
-    //ACABA VAN LAS FUNCIONES
-    public function mostrarCategorias(){
-        return $this->db->get('categorias')->result();
-    }
+	function obtenerCategoriasPorId($id){
+		$this->db->where('id', $id);
+		$resultado = $this->db->get('categorias')->result();
+		return $resultado;
+	}
 
-    public function agregarCategoria($data){
-        $fecha_registro=date('Y-m-d H:i:s', time());
-        $categoria=array(
-            'descripcion'=>$data['descripcion'],
-            'fecha_registro'=>$fecha_registro
-        );
-        $this->db->insert('categorias',$categoria);
-        return $this->db->insert_id();
-    }
+	function cambiarEstatusCategoria($id, $estatus){
+		$this->db->where('id', $id);
+		$this->db->set('estado', $estatus);
+		$this->db->update('categorias');
+		return ($this->db->affected_rows() > 0);
+	}
+	
+	function editarCategoria($id,$data){
+		$this->db->where('descripcion', $data['descripcion']);
+		$nomExiste = $this->db->get('categorias');
+		if ($nomExiste->num_rows()>0) {
+			return 2;
+		}
+		else {
+			$this->db->where('id', $id);
+			$this->db->update('categorias',$data);
+			return ($this->db->affected_rows() > 0);
+		}
+	}
 
-    public function modificarCategoria($data,$id){
-        $categoria=array(
-            'descripcion'=>$data['descripcion']
-        );
-        $this->db->where('id',$id)->update('categorias',$categoria);
-        return $this->db->affected_rows();
-    }
+	function agregarCategoria($data){
+		$this->db->where('descripcion', $data['descripcion']);
+		$nomExiste = $this->db->get('categorias');
+		if ($nomExiste->num_rows() > 0) {
+			return 2;
+		}
+		else {
+			$this->db->insert('categorias', $data);			
+			return ($this->db->affected_rows() > 0);
+		}
+	}
 
-    public function mostrarCategoria($idCategoria){
-        return $this->db->where('id',$idCategoria)->get('categorias')->row();
-    }
-
-    public function modificarEstado($id,$num){
-        $estado= array('estado'=>$num);
-        $this->db->where('id',$id)->update('categorias',$estado);
-        return $this->db->affected_rows();
-    }
-    
 }

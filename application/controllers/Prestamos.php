@@ -13,6 +13,6 @@ class Prestamos extends CI_Controller {
 	{
         $data['modulos'] = $this->Modulos_model->obtenerModulos();
         $data['prestamos'] = $this->Prestamos_modelo->mostrarPrestamos();
-        $this->load->view('prestamos',$data);
+        $this->load->view('Prestamos/prestamos',$data);
     }
 }    

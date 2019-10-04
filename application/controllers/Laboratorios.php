@@ -3,47 +3,99 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Laboratorios extends CI_Controller {
 
-	public function __construct(){
+    public function __construct(){
         parent::__construct();
-        $this->load->model('Modulos_model');
-        $this->load->model('Lab_modelo');
+        $this->load->Model("Lab_modelo");
+        $this->load->Model("Modulos_model");
+        $this->load->helper(array('ayuda_helper','url'));
+    }
 
-	}
-	public function index()
-	{
-        $data['modulos'] = $this->Modulos_model->obtenerModulos();
-        $data['laboratorios'] = $this->Lab_modelo->mostrarLaboratorios();
-        $this->load->view('laboratorios',$data);
+    public function index(){
+        /* if (validacion()){ */
+            /* $data['informacion'] = informacionInicial('Laboratorios'); */
+            /* $data['modulos'] = modulos(); */
+            $data['modulos'] = $this->Modulos_model->obtenerModulos();   
+            $this->load->view('Laboratorios/laboratorios1',$data);
+        /* }  */
+    }
+
+    public function formulario($id = ''){
+        if (empty($id)) {
+            $this->load->view('Laboratorios/formulario');
+        }
+        else{
+            $resultado['laboratorios'] = $this->Lab_modelo->obtenerLaboratoriosPorId($id);
+            $this->load->view('Laboratorios/formulario', $resultado);
+        }  
+    }
+
+    /*** P R O C E S O S ***/
+    public function obtenerLaboratoriosPorEstado($estatus){
+        $usuarios = $this->Lab_modelo->obtenerLaboratoriosPorEstado($estatus);
+        echo json_encode($usuarios);
+    }
+
+    public function cambiarEstatusLaboratorio(){
+        $id = $this->input->post('id');
+        $estado = $this->input->post('estado');
+        $usuarios = $this->Lab_modelo->cambiarEstatusLaboratorio($id, $estado);
+        echo $usuarios;
     }
 
     public function agregarLaboratorio(){
-        $data['descripcion']=$this->input->post('descripcion');
-        $data['ubicacion']=$this->input->post('ubicacion');
-        $data['capacidad']=$this->input->post('capacidad');
-        $idLaboratorio = $this->Lab_modelo->agregarLaboratorio($data);
-        echo json_encode( $this->Lab_modelo->mostrarLaboratorio($idLaboratorio) );
-    }
-
-    public function modificarLaboratorio(){
-        $data['descripcion']=$this->input->post('descripcionModificar');
-        $data['ubicacion']=$this->input->post('ubicacionModificar');
-        $data['capacidad']=$this->input->post('capacidadModificar');
-        $id=$this->input->post('idLaboratorio');
-        echo json_encode( $this->Lab_modelo->modificarLaboratorio($data,$id) );
-
-
-    }
-
-    public function modificarEstado(){
-        $id=$this->input->post('idEstado');
-        $estado=$this->input->post('estatusLaboratorio');
-        if($estado == 1){
-            $num = 0;
-            echo json_encode($this->Lab_modelo->modificarEstado($id,$num));
+        if($this->input->is_ajax_request()){ // solo se puede entrar por ajax 
+            $nombre = $this->input->post('txtnombre');
+            $ubicacion = $this->input->post('txtubicacion');
+            $capacidad = $this->input->post('txtcapacidad');
+            //Validaciones
+            $this->form_validation->set_rules('txtnombre', 'Nombre', 'required');
+            $this->form_validation->set_rules('txtubicacion', 'Ubicación', 'required');
+            $this->form_validation->set_rules('txtcapacidad', 'Capacidad', 'required');
+            if ($this->form_validation->run() === TRUE) {
+                $data = array(
+                    'id' => '',
+                    'nombre' => $nombre,
+                    'ubicacion' => $ubicacion,
+                    'capacidad' => $capacidad,
+                    'estado' => 1
+                );
+                $resultado = $this->Lab_modelo->agregarLaboratorio($data);
+                echo $resultado;
+            }
+            else{
+                echo validation_errors('<li>', '</li>');
+            }
         }
         else{
-            $num = 1 ;
-            echo json_encode($this->Lab_modelo->modificarEstado($id,$num));
+            show_404();
         }
     }
+
+    public function editarLaboratorio(){
+        if($this->input->is_ajax_request()){ // solo se puede entrar por ajax 
+            $nombre = $this->input->post('txtnombre');
+            $ubicacion = $this->input->post('txtubicacion');
+            $capacidad = $this->input->post('txtcapacidad');
+            $id = $this->input->post('id');            
+            $this->form_validation->set_rules('txtnombre', 'Nombre', 'required');
+            $this->form_validation->set_rules('txtubicacion', 'Ubicación', 'required');
+            $this->form_validation->set_rules('txtcapacidad', 'Capacidad', 'required');
+            if ($this->form_validation->run() === TRUE) {
+                $data = array(
+                    'nombre' => $nombre,
+                    'ubicacion' => $ubicacion,
+                    'capacidad' => $capacidad,
+                );
+                $resultado = $this->Lab_modelo->editarLaboratorio($id,$data);
+                echo $resultado;
+            }
+            else{
+                echo validation_errors('<li>', '</li>');
+            }
+        }
+        else{
+            show_404();
+        }
+    }
+
 }
