@@ -24,12 +24,12 @@ class Perfiles extends CI_Controller {
         // }
     }
 
-    //Vista del modal cargado para asignar o eliminar modulos 
-    // public function agregarModulos_modal($id_perfil){
-    //     $data['id_perfil'] = $id_perfil;
-    //     $data['modulosx'] = $this->Modulos_modelo->modulosXPerfil($id_perfil);
-    //     $this->load->view('Perfiles/listado_modulos',$data);
-    // }
+   // Vista del modal cargado para asignar o eliminar modulos 
+    public function agregarModulos_modal($id_perfil){
+        $data['id_perfil'] = $id_perfil;
+        $data['modulosx'] = $this->Modulos_model->modulosXPerfil($id_perfil);
+        $this->load->view('Perfiles/listado_modulos',$data);
+    }
 
     public function formularioPerfiles($id = ''){
         if (empty($id)) {
@@ -104,29 +104,29 @@ class Perfiles extends CI_Controller {
         }
     }
 
-    // public function asignarModuloPerfil(){
-    //     if($this->input->is_ajax_request()) {
-    //         $id_perfil = $this->input->post("id_perfil"); 
-    //         $id_modulo = $this->input->post("id_modulo"); 
-    //         $datos = array(
-    //             'id_perfil'      => $id_perfil,
-    //             'id_modulo'      => $id_modulo
-    //         );
-    //         echo $this->Perfiles_modelo->agregarModulo($datos);
-    //     }
-    //     else {
-    //         show_404();
-    //     }
-    // }
+    public function asignarModuloPerfil(){
+        if($this->input->is_ajax_request()) {
+            $id_perfil = $this->input->post("id_perfil"); 
+            $id_modulo = $this->input->post("id_modulo"); 
+            $datos = array(
+                'id_perfil'      => $id_perfil,
+                'id_modulo'      => $id_modulo
+            );
+            echo $this->Perfiles_modelo->agregarModulo($datos);
+        }
+        else {
+            show_404();
+        }
+    }
 
-    // public function eliminarModuloPerfil(){
-    //     if ($this->input->is_ajax_request()) {
-    //         $idPerfil = $this->input->post("id_perfil"); 
-    //         $idModulo = $this->input->post("id_modulo"); 
-    //         echo $this->Perfiles_modelo->eliminarModulo($idPerfil, $idModulo);
-    //     }
-    //     else{
-    //         show_404();
-    //     }
-    // }
+    public function eliminarModuloPerfil(){
+        if ($this->input->is_ajax_request()) {
+            $idPerfil = $this->input->post("id_perfil"); 
+            $idModulo = $this->input->post("id_modulo"); 
+            echo $this->Perfiles_modelo->eliminarModulo($idPerfil, $idModulo);
+        }
+        else{
+            show_404();
+        }
+    }
 }

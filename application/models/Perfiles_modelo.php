@@ -47,15 +47,15 @@ class Perfiles_modelo extends CI_Model{
 		}
 	}
 
-	// public function agregarModulo($data){
-	//   	$this->db->insert('perfiles_modulos', $data);
-    // 	return ($this->db->affected_rows() > 0);
-	// }
+	public function agregarModulo($data){
+	  	$this->db->insert('permisos', $data);
+    	return ($this->db->affected_rows() > 0);
+	}
 	
-	// public function eliminarModulo($id_perfil,$id_modulo){
-	//   	$this->db->where('id_perfil',$id_perfil);
-	// 	$this->db->where('id_modulo',$id_modulo);
-	//   	$this->db->delete('perfiles_modulos');
-    //   	return ($this->db->affected_rows() > 0);
-	// }
+	public function eliminarModulo($id_perfil,$id_modulo){
+	  	$this->db->where('id_perfil',$id_perfil);
+		$this->db->where('id_modulo',$id_modulo);
+	  	$this->db->delete('permisos');
+      	return ($this->db->affected_rows() > 0);
+	}
 }
