@@ -2,6 +2,9 @@
 <?php $this->load->view('Global/header'); ?>
   <?php $this->load->view('Global/menu'); ?>
   <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -13,7 +16,7 @@
                 </blockquote>
                 <div class="form-group row">
                     <div class="col-lg-3">
-                        <input type="search" class="form-control" placeholder="Buscar">
+                        <input type="search" class="form-control" placeholder="Buscar" id="txtBuscar" name="txtBuscar">
                     </div>
                 </div>
             </div>
@@ -31,7 +34,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form id="form-agregar">
+                                <form id="form-agregar" action="<?php echo base_url() ?>index.php/cMateriales/agregarMaterial" method="POST">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Descripcion</label>
                                         <input type="text" class="form-control" name="descripcion" id="descripcion" aria-describedby="emailHelp" placeholder="Descripcion">
@@ -62,40 +65,38 @@
                                 </form>
                         </div>
                         </div>
-                    <table class="table table-striped no-margin" style="width:100%">
-                            <thead class="thead-dark">
-                                <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Descripcion</th>
-                                <th scope="col">Existencia</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Accion</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tMateriales">
+                    <table class="table table-striped no-margin" style="width:100%" id="tablaMateriales">
+                        <thead class="thead-dark">
+                            <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Existencia</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <?php 
-                                    foreach($result as $row){
-                                        $estado='<button type="button" onclick="estadoMaterial(\''.$row->id.'\',\''.$row->estado.'\')" class="btn btn-success">Activar</button>'; 
-                                        //$estado='<input id="checkboxOff" type="checkbox" data-toggle="toggle" onclick="estadoMaterial(\''.$row->id.'\',\''.$row->estado.'\')">';
-                                        if($row->estado==1){
-                                        // $estado='<input id="checkboxOn" type="checkbox" checked data-toggle="toggle" onclick="estadoMaterial(\''.$row->id.'\',\''.$row->estado.'\')">';
-                                            $estado='<button type="button" onclick="estadoMaterial(\''.$row->id.'\',\''.$row->estado.'\')" class="btn btn-danger">Desactivar</button>'; 
-                                        }
-
-                                        echo 
-                                            '<tr>
-                                                <td>'.$row->id.'</td>
-                                                <td>'.$row->descripcion.'</td>
-                                                <td>'.$row->cantidadExistencia.'</td>
-                                                <td>'.$estado.'</td>
-                                                <td><input type="button" id="'.$row->id.'" name="modificar" value="Modificar" class="btn btn-primary edit_data"></td>                                        
-                                            </tr>';
+                                foreach($result as $row){
+                                    $estado='<button type="button" onclick="estadoMaterial(\''.$row->id.'\',\''.$row->estado.'\')" class="btn btn-success">Activar</button>'; 
+                                    //$estado='<input id="checkboxOff" type="checkbox" data-toggle="toggle" onclick="estadoMaterial(\''.$row->id.'\',\''.$row->estado.'\')">';
+                                    if($row->estado==1){
+                                    // $estado='<input id="checkboxOn" type="checkbox" checked data-toggle="toggle" onclick="estadoMaterial(\''.$row->id.'\',\''.$row->estado.'\')">';
+                                        $estado='<button type="button" onclick="estadoMaterial(\''.$row->id.'\',\''.$row->estado.'\')" class="btn btn-danger">Desactivar</button>'; 
                                     }
 
-                                    
-                                ?>
-                            </tbody>
-                            </table>
+                                    echo 
+                                        '<tr>
+                                            <td>'.$row->id.'</td>
+                                            <td>'.$row->descripcion.'</td>
+                                            <td>'.$row->cantidadExistencia.'</td>
+                                            <td>'.$estado.'</td>
+                                            <td><input type="button" id="'.$row->id.'" name="modificar" value="Modificar" class="btn btn-primary edit_data"></td>                                        
+                                        </tr>';
+                                }
+                            ?>
+                        </tbody>
+                    </table>
                             <button type="button" class="btn btn-primary" onclick="agregarMaterial()">Añadir</button>
                     </div>
                 </div>
@@ -109,32 +110,46 @@
 
 <script>
 
-
     function agregarMaterial(){
         $("#modal-agregar").modal('show');
-        /* $('input[name="descripcion"]').val('');
+        $('input[name="descripcion"]').val('');
         $('input[name="cantidadExistencia"]').val('');
-        $('select[name="slctCategoria"]').val(''); */
+        $('select[name="slctCategoria"]').val(''); 
     }
 
-    $('#form-agregar').submit(function (e){
-        const postData = {
-            descripcion: $('#descripcion').val(),
-            cantidadExistencia: $('#cantidadExistencia').val(),
-            categoria: $('#slctCategoria').val()
-        };
-        console.log(postData);
-        $.post('cMateriales/altaMateriales', postData, function (response){
-            console.log(response);
-        });
-
-        e.preventDefault();
+    $('#form-agregar').submit(function() {
+        if($('input[name="descripcion"]').val() !== "" && $('input[name="cantidadExistencia"]').val() !== "") {
+            $.ajax({
+                url: 'cMateriales/agregarMaterial', 
+                type: "post",
+                data: $('#form-agregar').serialize(),
+                success: function( response ) {
+                    response = JSON.parse(response);
+                    let estadoBoton= '<button type="button" onclick="estadoMaterial(\''+response.id+'\',\''+response.estado+'\')" class="btn btn-success">Activar</button>';
+                    if(response.estado==1){
+                        estadoBoton='<button type="button" onclick="estadoMaterial(\''+response.id+'\',\''+response.estado+'\')" class="btn btn-danger">Desactivar</button>';
+                    }
+                    $('#tablaMateriales tbody').prepend(
+                        '<tr>'+
+                            '<td>'+response.id+'</td>'+
+                            '<td>'+response.descripcion+'</td>'+
+                            '<td>'+response.cantidadExistencia+'</td>'+
+                            '<td>'+estadoBoton+'</td>'+
+                            '<td><button type="button" onclick="modificarPerfil(\''+response.nombre+'\', \''+response.descripcion+'\', '+response.id+')" class="btn btn-primary">Modificar</button></td>'+
+                        '</tr>'
+                    );
+                    $("#modal-agregar").modal('hide');
+                    alert("Se ha guardado el Material");
+                }
+            });
+        }
+        else {
+            alert('Favor de llenar todos los campos.');
+        }
+        return false;
     });
 
-
-
-
-
+    $('#tablaMateriales').DataTable();
 
     var idEstado = 0;
     var estatusMaterial = 0;    
@@ -171,6 +186,20 @@
             }
         });
     });
+
+    function mostrarDatos(valor) {
+        var base_url = '<?php echo base_url(); ?>';
+        $.ajax({
+            url: base_url+"cMateriales/buscar",
+            type: "POST",
+            data:{buscar:valor},
+            success:function(respuesta){
+                alert(respuesta);
+            }
+        });
+    }
+
+
     
 
 </script> 

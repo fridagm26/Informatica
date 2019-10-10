@@ -10,63 +10,37 @@ class MMateriales extends CI_Model {
     
     public function getCategorias(){
         $categorias = $this->db->select('*')->from('categorias')->where('estado',1)->get();
-        return $categorias;
+        return $categorias->result();
    }
 
-
-   /* public function agregar($parametro){
-        $campos = array(
-            'descripcion' => $parametro['descripcion'],
-            'cantidadExistencia' => $parametro['cantidadExistencia'],
-            'id_usuario' => $parametro['id_usuario'],
-            'id_categoria' => $parametro['id_categoria']
-        );
-
-        $this->db->insert('materiales', $campos);
-        redirect('cMateriales', 'refresh');
-    }  */  
-
-    /* public function dataMateriales(){
-        $data = array(
-            'descripcion' => $this->input->post('descripcion'),
-            'cantidadExistencia' => $this->input->post('cantidadExistencia'),
-            'id_usuario' => 5,
-            'id_categoria' => $this->input->post('slctCategoria'),
-        );
-        $this->db->insert('materiales', $data);
-    } */
-
-    public function agregarMaterial(){
-        if(isset($_POST['descripcion'])){
-            $descripcion = $_POST['descripcion'];
-            $cantidadExistencia = $_POST['cantidadExistencia'];
-            $categoria = $_POST['categoria'];
-            echo "$descripcion $cantidadExistencia $categoria";
-            $this->db->query('INSERT INTO materiales(descripcion, cantidadExistencia, id_categoria, id_usuario) 
-            VALUES ('.$descripcion.', '.$cantidadExistencia.', '.$categoria.' 5)')->result();
-        }
+    function obtenerMaterialesPorEstado($estatus){
+        if($estatus == 0 || $estatus == 1)
+            $this->db->where('estado', $estatus);
+        $resultado = $this->db->get('materiales')->result();
+        return $resultado;
     }
 
-    public function getMateriales(){
-        $query = $this->db->query('SELECT * FROM materiales');
-        return $query->result();
-    }	
+    function obtenerMaterialesPorId($id){
+		$this->db->where('id', $id);
+		$resultado = $this->db->get('materiales')->result();
+		return $resultado;
+	}
 
-    public function modificarEstado($id,$num){
-        $estado= array('estado'=>$num);
-        $this->db->where('id',$id)->update('materiales',$estado);
-        return $this->db->affected_rows();
+    function cambiarEstatusMaterial($id, $estatus){
+		$this->db->where('id', $id);
+		$this->db->set('estado', $estatus);
+		$this->db->update('materiales');
+		return ($this->db->affected_rows() > 0);
+	}
+
+    function agregarMaterial($data){
+        $this->db->insert('materiales', $data);			
+        return ($this->db->affected_rows() > 0);
     }
-
-    public function modificarMaterial($data,$id){
-        $material=array(
-            'descripcion'=>$data['descripcion'],
-            'cantidadExistencia'=>$data['cantidadExistencia'],
-            'id_categoria'=>$data['slctCategoria']
-        );
-        $this->db->where('id',$id)->update('materiales',$material);
-        return $this->db->affected_rows();
-    }
-
-
+    
+    function editarMaterial($id, $data){
+		$this->db->where("id",$id);
+		$this->db->update("materiales", $data);
+		return ($this->db->affected_rows() > 0);
+	}
 }
