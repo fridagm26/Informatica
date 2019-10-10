@@ -79,7 +79,7 @@
 
         function obtenerDatos(estado) {
             $.ajax({
-                url:base_url+"index.php/Categorias/obtenerCategoriasPorEstado/" + estado,
+                url:"<?php base_url() ?>Categorias/obtenerCategoriasPorEstado/" + estado,
                 type:"POST",            
                 success:function(respuesta){
                     respuesta = JSON.parse(respuesta);
@@ -126,7 +126,7 @@
                     return $message;
                 },
                 data: {
-                    'pageToLoad': base_url+'index.php/Categorias/formulario'
+                    'pageToLoad': '<?php base_url() ?>Categorias/formulario/'+actualid
                 },
                 buttons: [
                     { //agrega los botones del modal
@@ -158,7 +158,7 @@
         				            		var formData = new FormData($('#formulario')[0]);
         		                    		formData.append('id', id);
         				                    $.ajax({
-        				                        url:base_url+"index.php/Categorias/editarLaboratorio",
+        				                        url:"<?php base_url() ?>Categorias/editarLaboratorio",
         				                        type:"POST",
         				                        data:formData,
         				                        cache:false,
@@ -233,7 +233,7 @@
                 callback: function(result) {
                     if(result){
                         $.ajax({
-                            url:base_url+"index.php/Categorias/cambiarEstatusCategoria/",
+                            url:"<?php base_url() ?>Categorias/cambiarEstatusCategoria/",
                             type:"POST",
                             data: {
                                 id: actualid,
@@ -272,7 +272,7 @@
                     return $message;
                 },
                 data: {
-                    'pageToLoad': base_url+'index.php/Categorias/formulario'
+                    'pageToLoad': '<?php base_url() ?>index.php/Categorias/formulario'
                 },
                 buttons: [
                     { 
@@ -288,7 +288,7 @@
                         action: function(dialogItself) { 
                             var formData = new FormData($('#formulario')[0]);                    
                             $.ajax({
-                                url:base_url+"index.php/Categorias/agregarCategoria",
+                                url:"<?php base_url() ?>Categorias/agregarCategoria",
                                 type:"POST",
                                 data:formData,
                                 cache:false,

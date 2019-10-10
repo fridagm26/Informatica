@@ -8,7 +8,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="form-group col-md-12">
-				<label for="txtnombre" class="control-label">Nombre</label>
+				<label for="txtnombre" class="control-label"></label>
 				<input  name="txtnombre" data-info="<?php echo (isset($laboratorios[0]->descripcion)) ? $laboratorios[0]->descripcion : '' ?>"  data-id="<?php echo(isset($laboratorios[0]->id)) ? $laboratorios[0]->id : '' ?>" value="<?php echo(isset($laboratorios[0]->descripcion)) ? $laboratorios[0]->descripcion : '' ?>" class="form-control LetrasNumeros" id="txtnombre" placeholder="Ingrese el nombre">
 			</div>
 		</div>

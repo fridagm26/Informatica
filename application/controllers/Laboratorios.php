@@ -7,15 +7,16 @@ class Laboratorios extends CI_Controller {
         parent::__construct();
         $this->load->Model("Lab_modelo");
         $this->load->Model("Modulos_model");
-        $this->load->helper(array('ayuda_helper','url'));
     }
 
     public function index(){
+        $data['modulos'] = $this->Modulos_model->obtenerModulos();   
+        $this->load->view('Laboratorios/laboratorios',$data);
         /* if (validacion()){ */
             /* $data['informacion'] = informacionInicial('Laboratorios'); */
             /* $data['modulos'] = modulos(); */
-            $data['modulos'] = $this->Modulos_model->obtenerModulos();   
-            $this->load->view('Laboratorios/laboratorios1',$data);
+            /* $data['laboratorios'] = $this->Lab_modelo->mostrarLaboratorios(); */   
+            
         /* }  */
     }
 
@@ -27,6 +28,7 @@ class Laboratorios extends CI_Controller {
             $resultado['laboratorios'] = $this->Lab_modelo->obtenerLaboratoriosPorId($id);
             $this->load->view('Laboratorios/formulario', $resultado);
         }  
+
     }
 
     /*** P R O C E S O S ***/
@@ -54,7 +56,7 @@ class Laboratorios extends CI_Controller {
             if ($this->form_validation->run() === TRUE) {
                 $data = array(
                     'id' => '',
-                    'nombre' => $nombre,
+                    'descripcion' => $nombre,
                     'ubicacion' => $ubicacion,
                     'capacidad' => $capacidad,
                     'estado' => 1

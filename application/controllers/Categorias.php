@@ -15,7 +15,7 @@ class Categorias extends CI_Controller {
             /* $data['categorias'] = $this->Categorias_model->obtenerCategorias();  */
             /* $data['modulos'] = modulos(); */       
             $data['modulos'] = $this->Modulos_model->obtenerModulos();   
-            $this->load->view('Categorias/categorias1',$data);
+            $this->load->view('Categorias/categorias',$data);
         /* }  */
     }
 

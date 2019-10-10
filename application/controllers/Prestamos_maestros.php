@@ -15,6 +15,7 @@ class Prestamos_maestros extends CI_Controller {
         $data['materiales'] = $this->Prestamos_maestros_modelo->mostrarMateriales();
         $data['detalle_prestamo'] = $this->Prestamos_maestros_modelo->mostrarDetallesP();
         $data['categorias'] = $this->Prestamos_maestros_modelo->mostrarCategorias();
+        /* $this->load->view('prestamos/formularioMaestro',$data); */
         $this->load->view('Profesor/prestamos_maestros',$data);
         }
         public function getEquipoId($id){

@@ -81,7 +81,7 @@
 
         function obtenerDatos(estado) {
             $.ajax({
-                url:base_url+"index.php/Laboratorios/obtenerLaboratoriosPorEstado/" + estado,
+                url:"<?php base_url() ?>Laboratorios/obtenerLaboratoriosPorEstado/" + estado,
                 type:"POST",            
                 success:function(respuesta){
                     respuesta = JSON.parse(respuesta);
@@ -102,7 +102,7 @@
                         //Agregar una nueva fila
                         var  fila = tabla.row.add([
                             item['id'], //Una celda
-                            item['nombre'],
+                            item['descripcion'],
                             item['ubicacion'],
                             item['capacidad'],
                             ac,
@@ -130,7 +130,7 @@
                     return $message;
                 },
                 data: {
-                    'pageToLoad': base_url+'index.php/Laboratorios/formulario'
+                    'pageToLoad':'<?php base_url() ?>Laboratorios/formulario/'+actualid
                 },
                 buttons: [
                     { //agrega los botones del modal
@@ -166,7 +166,7 @@
         				            		var formData = new FormData($('#formulario')[0]);
         		                    		formData.append('id', id);
         				                    $.ajax({
-        				                        url:base_url+"index.php/Laboratorios/editarLaboratorio",
+        				                        url:"<?php base_url() ?>Laboratorios/editarLaboratorio",
         				                        type:"POST",
         				                        data:formData,
         				                        cache:false,
@@ -241,7 +241,7 @@
                 callback: function(result) {
                     if(result){
                         $.ajax({
-                            url:base_url+"index.php/Laboratorios/cambiarEstatusLaboratorio/",
+                            url:"<?php base_url() ?>Laboratorios/cambiarEstatusLaboratorio/",
                             type:"POST",
                             data: {
                                 id: actualid,
@@ -280,7 +280,7 @@
                     return $message;
                 },
                 data: {
-                    'pageToLoad': base_url+'index.php/Laboratorios/formulario'
+                    'pageToLoad': '<?php base_url() ?>Laboratorios/formulario'
                 },
                 buttons: [
                     { 
@@ -296,7 +296,7 @@
                         action: function(dialogItself) { 
                             var formData = new FormData($('#formulario')[0]);                    
                             $.ajax({
-                                url:base_url+"index.php/Laboratorios/agregarLaboratorio",
+                                url:"<?php base_url() ?>Laboratorios/agregarLaboratorio",
                                 type:"POST",
                                 data:formData,
                                 cache:false,
