@@ -6,7 +6,8 @@ class Usuarios extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->Model('Usuarios_modelo');
-        $this->load->Model('Perfiles_model');
+        $this->load->Model('Perfiles_modelo');
+        $this->load->Model('Modulos_model');
         
     }
     // ======================================================================================================================
@@ -14,7 +15,8 @@ class Usuarios extends CI_Controller {
     // ======================================================================================================================
     /*** V I S T A S ***/
     public function index(){
-        $this->load->view('Administrador/usuarios_vista');
+        $data['modulos'] = $this->Modulos_model->obtenerModulos();
+        $this->load->view('Administrador/usuarios_vista',$data);
        /*  if (validacion()){
             $data['informacion'] = informacionInicial('Usuarios');
             $data['modulos'] = modulos();

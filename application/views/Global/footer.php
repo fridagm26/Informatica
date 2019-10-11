@@ -2,7 +2,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 0.0
     </div>
-    <strong>Copyright &copy; 2018 <a href="<?php echo base_url(); ?>">Almancen Informatica</a>.</strong> Todos los Derechos Reservados <strong>Proyectos especiales</strong> by UPSIN.
+    <strong>Copyright &copy; 2019 <a href="<?php echo base_url(); ?>">Almancen Informatica</a>.</strong> Todos los Derechos Reservados <strong>Proyectos especiales</strong> by UPSIN.
 </footer>
 
 <!-- jQuery 3 -->
@@ -59,11 +59,11 @@
 	     'searching'    : search,
 	     'ordering'     : true,
 	     'info'         : true,
-	     'scrollx'      :true,
+	     'scrollx'      : true,
 	     'autoWidth'    : false,
 	     'destroy'      : true,
 	     "iDisplayLength": length,
-	    //  "language"     : {  "url": `<?php echo base_url()?>assets/files/SpanishT.json`  }
+	      "language"     : {  "url": `<?php echo base_url()?>assets/files/SpanishT.json`  }
 	  });
 
 	}

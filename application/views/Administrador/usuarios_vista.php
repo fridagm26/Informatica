@@ -133,7 +133,7 @@
                 callback: function(result) {
                     if(result){
                         $.ajax({
-                            url:"<?php base_url() ?>index.php/Usuarios/cambiarEstatusUsuarios/",
+                            url:"<?php base_url() ?>Usuarios/cambiarEstatusUsuarios",
                             type:"POST",
                             data:{
                                 id: actualid,
@@ -181,7 +181,7 @@
                 },
                 data: 
                 {
-                    "pageToLoad": "<?php base_url() ?>index.php/Usuarios/formularioUsuarios"
+                    "pageToLoad": "<?php base_url() ?>Usuarios/formularioUsuarios"
                 },
                 buttons:
                 [
@@ -190,7 +190,7 @@
                         cssClass: "btn-primary",
                         action:function(dialog) {
                             $.ajax({
-                                url : "<?php base_url() ?>index.php/Usuarios/agregarUsuarios",
+                                url : "<?php base_url() ?>Usuarios/agregarUsuarios",
                                 type: "POST",
                                 data: $("#formulario").serialize(),
                                 success:function(resp) {  
