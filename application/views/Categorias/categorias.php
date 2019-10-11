@@ -158,7 +158,7 @@
         				            		var formData = new FormData($('#formulario')[0]);
         		                    		formData.append('id', id);
         				                    $.ajax({
-        				                        url:"<?php base_url() ?>Categorias/editarLaboratorio",
+        				                        url:"<?php base_url() ?>Categorias/editarCategoria",
         				                        type:"POST",
         				                        data:formData,
         				                        cache:false,
@@ -247,7 +247,7 @@
                                 else{
                                     BootstrapDialog.show({
                                         title: 'No se actualizó',
-                                        message: 'No se modificó el estatus del laboratorio seleccionado'
+                                        message: 'No se modificó el estatus de la categoria seleccionado'
                                     });
                                 }
                             },

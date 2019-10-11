@@ -56,7 +56,7 @@ class Laboratorios extends CI_Controller {
             if ($this->form_validation->run() === TRUE) {
                 $data = array(
                     'id' => '',
-                    'descripcion' => $nombre,
+                    'nombre' => $nombre,
                     'ubicacion' => $ubicacion,
                     'capacidad' => $capacidad,
                     'estado' => 1

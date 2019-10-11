@@ -166,7 +166,7 @@
         				            		var formData = new FormData($('#formulario')[0]);
         		                    		formData.append('id', id);
         				                    $.ajax({
-        				                        url:"<?php base_url() ?>Laboratorios/editarLaboratorio",
+        				                        url:"<?php base_url() ?>Laboratorios/editarLaboratorio/",
         				                        type:"POST",
         				                        data:formData,
         				                        cache:false,

@@ -23,7 +23,7 @@ class Lab_modelo extends CI_Model{
 	}
 	
 	function editarLaboratorio($id,$data){
-		$this->db->where('descripcion', $data['descripcion']);
+		$this->db->where('descripcion', $data['nombre']);
 		$nomExiste = $this->db->get('laboratorios');
 		if ($nomExiste->num_rows()>0) {
 			return 2;
@@ -36,7 +36,7 @@ class Lab_modelo extends CI_Model{
 	}
 
 	function agregarLaboratorio($data){
-		$this->db->where('descripcion', $data['descripcion']);
+		$this->db->where('descripcion', $data['nombre']);
 		$nomExiste = $this->db->get('laboratorios');
 		if ($nomExiste->num_rows() > 0) {
 			return 2;
