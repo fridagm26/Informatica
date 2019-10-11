@@ -38,9 +38,16 @@ class MMateriales extends CI_Model {
         return ($this->db->affected_rows() > 0);
     }
     
-    function editarMaterial($id, $data){
-		$this->db->where("id",$id);
-		$this->db->update("materiales", $data);
-		return ($this->db->affected_rows() > 0);
+    function editarMaterial($id,$data){
+		$this->db->where('descripcion', $data['descripcion']);
+		$nomExiste = $this->db->get('materiales');
+		if ($nomExiste->num_rows()>0) {
+			return 2;
+		}
+		else {
+			$this->db->where('id', $id);
+			$this->db->update('materiales',$data);
+			return ($this->db->affected_rows() > 0);
+		}
 	}
 }

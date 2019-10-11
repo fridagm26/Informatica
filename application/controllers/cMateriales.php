@@ -11,8 +11,7 @@ class CMateriales extends CI_Controller {
     }
     
 	public function index(){
-        $data['modulos'] = $this->Modulos_model->obtenerModulos();
-        $data['categorias'] = $this->mMateriales->getCategorias();    
+        $data['modulos'] = $this->Modulos_model->obtenerModulos();  
         $this->load->view('Materiales/vMateriales', $data);
     }
 
@@ -70,14 +69,17 @@ class CMateriales extends CI_Controller {
     public function editarMaterial(){
         if($this->input->is_ajax_request()){ // solo se puede entrar por ajax 
             $id = $this->input->post('id');         
+            $descripcion = $this->input->post('txtDescripcion');
+            $cantidadExistencia = $this->input->post('txtCantidadExistencia');
+            $idCategoria = $this->input->post('cmbCategorias');
             $this->form_validation->set_rules('txtDescripcion', 'Descripcion', 'required');
             $this->form_validation->set_rules('txtCantidadExistencia', 'Cantidad', 'required');
             $this->form_validation->set_rules("cmbCategorias", "Categoria", "required|is_natural_no_zero");
             if ($this->form_validation->run() === TRUE) {
                 $data = array(
-                    'descripcion' => $this->input->post("txtDescripcion"),
-                    'cantidadExistencia' => $this->input->post("txtCantidadExistencia"),
-                    'id_categoria' => $this->input->post("cmbCategorias")
+                    'descripcion' => $descripcion,
+                    'cantidadExistencia' => $cantidadExistencia,
+                    'id_categoria' => $idCategoria
                 );
                 $resultado = $this->mMateriales->editarMaterial($id,$data);
                 echo $resultado;
@@ -89,68 +91,6 @@ class CMateriales extends CI_Controller {
         else{
             show_404();
         }
-    }
-
-    public function editarPerfil(){
-        if($this->input->is_ajax_request()){ // solo se puede entrar por ajax 
-            $nombre = $this->input->post('txtnombre');
-            $descripcion = $this->input->post('txtdescripcion');
-            $id = $this->input->post('id');            
-            $this->form_validation->set_rules('txtnombre', 'Nombre', 'required');
-            $this->form_validation->set_rules('txtdescripcion', 'Descripción', 'required');
-            if ($this->form_validation->run() === TRUE) {
-                $data = array(
-                    'nombre' => $nombre,
-                    'descripcion' => $descripcion,
-                );
-                $resultado = $this->Perfiles_modelo->editarPerfil($id,$data);
-                echo $resultado;
-            }
-            else{
-                echo validation_errors('<li>', '</li>');
-            }
-        }
-        else{
-            show_404();
-        }
-    }
-
-
-   /*********************************************************************** */
-    public function agregarMaterial(){
-        $data['descripcion']=$this->input->post('descripcion');
-        $data['cantidadExistencia']=$this->input->post('cantidadExistencia');
-        $data['slctCategoria']=$this->input->post('slctCategoria');
-        $idMaterial = $this->mMateriales->agregarMaterial($data);
-        echo json_encode( $this->mMateriales->mostrarMaterial($idMaterial) );
-    }
-
-    public function busqueda() {
-        $consulta =  $this->input->post('txtBuscar');
-        $resultado = $this->mMateriales->busqueda($consulta);
-	}
-
-    public function modificarEstado(){
-        $id=$this->input->post('idEstado');
-        $estado=$this->input->post('estatusMaterial');
-        if($estado == 1){
-            $num = 0;
-            echo json_encode($this->mMateriales->modificarEstado($id,$num));
-            redirect('cMateriales');
-        }
-        else{
-            $num = 1 ;
-            echo json_encode($this->mMateriales->modificarEstado($id,$num));
-            redirect('cMateriales');
-        }
-    }
-
-    public function modificarMaterial(){
-        $data['descripcion']=$this->input->post('descripcion');
-        $data['cantidadExistencia']=$this->input->post('cantidadExistencia');
-        $data['slctCategoria']=$this->input->post('slctCategoria');
-        $id=$this->input->post('id_material');
-        echo json_encode( $this->mMateriales->modificarMaterial($data,$id) );
     }
 
 }

@@ -9,19 +9,19 @@
 		<div class="row">
 			<div class="form-group col-md-12">
 				<label for="txtDescripcion" class="control-label">Nombre</label>
-				<input  name="txtDescripcion" data-info="<?php echo (isset($material->descripcion)) ? $material->descripcion : '' ?>"  data-id="<?php echo(isset($material->id)) ? $material->id : '' ?>" value="<?php echo(isset($material->descripcion)) ? $material->descripcion : '' ?>" class="form-control LetrasNumeros" id="txtDescripcion" placeholder="Ingrese la descripcion">
+				<input  name="txtDescripcion" data-info="<?php echo (isset($materiales[0]->descripcion)) ? $materiales[0]->descripcion : '' ?>"  data-id="<?php echo(isset($materiales[0]->id)) ? $materiales[0]->id : '' ?>" value="<?php echo(isset($materiales[0]->descripcion)) ? $materiales[0]->descripcion : '' ?>" class="form-control LetrasNumeros" id="txtDescripcion" placeholder="Ingrese la descripcion">
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-md-12">
 				<label for="txtCantidadExistencia" class="control-label">Cantidad Existencia</label>
-				<input  name="txtCantidadExistencia" data-info="<?php echo (isset($material->cantidadExistencia)) ? $material->cantidadExistencia : '' ?>"  data-id="<?php echo(isset($material->id)) ? $material->id : '' ?>" value="<?php echo(isset($material->cantidadExistencia)) ? $material->cantidadExistencia : '' ?>" class="form-control LetrasNumeros" id="txtCantidadExistencia" placeholder="Ingrese la cantidad del producto">
+				<input  name="txtCantidadExistencia" data-info="<?php echo(isset($materiales[0]->cantidadExistencia)) ? $materiales[0]->cantidadExistencia : '' ?>" value="<?php echo(isset($materiales[0]->cantidadExistencia)) ? $materiales[0]->cantidadExistencia : '' ?>" class="form-control LetrasNumeros" id="txtCantidadExistencia" placeholder="Ingrese la cantidad del producto">
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-md-12">
 				<label class="control-label" for="cmbCategorias">Categoria</label>
-				<select class="form-control" name="cmbCategorias" id="cmbCategorias" data-info="<?php  echo(isset($material)) ? $material->id_categoria : '' ?>">
+				<select class="form-control" name="cmbCategorias" id="cmbCategorias" data-info="<?php echo(isset($materiales[0]->id_categoria)) ? $materiales[0]->id_categoria : '' ?>" value="<?php echo(isset($materiales[0]->id_categoria)) ? $materiales[0]->id_categoria : '' ?>">
 					<option value="0">Seleccione la categoria</option>
 					<option value="2">Material</option>
 					<option value="1">Equipo</option>

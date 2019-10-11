@@ -8,7 +8,7 @@
           <div class="container-fluid">
                <div class="row">
                     <blockquote style=" border-left: 5px solid #2f4159;">
-                        <h1 class="text-justify">Materiales</h1>
+                        <h1 class="text-justify">Equipos</h1>
                         <!--<small id="verDocumentacion"><cite title="Source Title"><strong>Dar clic para ver la información requerida</strong></cite></small>-->
                     </blockquote>
                </div>
@@ -25,7 +25,7 @@
                <div class="row">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title"><i class="fa fa-users"></i>  Listado de materiales</h3>
+                            <h3 class="box-title"><i class="fa fa-users"></i>  Listado de Equipos</h3>
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                 </button>
@@ -33,12 +33,14 @@
                         </div>
                         <div class="box-body">
                     	   <div class="table-responsive">
-                    		    <table id="tablaMateriales" class="table table-striped no-margin" style="width:100%">
+                    		    <table id="tablaEquipos" class="table table-striped no-margin" style="width:100%">
                     	            <thead>
         						        <tr> 
         						            <th>ID</th>
         						            <th>Descripcion</th>
-        						            <th>Existencia</th>
+        						            <th>Num Inventario</th>
+                                            <th>Serie</th>
+                                            <th>Resguardo</th>
                                             <th>Estado</th>
         						            <th>Opciones</th>
         						        </tr>
@@ -47,7 +49,7 @@
         						           
     						        </tbody>
         						</table>
-                                <button type="button" class="btn btn-primary btn-lg" id="agregarMaterial" style="background-color: #264d78;">Agregar material</button> 
+                                <button type="button" class="btn btn-primary btn-lg" id="agregarEquipo" style="background-color: #264d78;">Agregar equipo</button> 
                     	   </div>
                         </div>
                     </div>
@@ -65,7 +67,7 @@
         obtenerDatos(x);
 
         //Declaro la tabla
-        var tabla = insertarPaginado("tablaMateriales",15,true);
+        var tabla = insertarPaginado("tablaEquipos",15,true);
         
         $('#estado').change(function(){
             var estado = $(this).val();
@@ -74,7 +76,7 @@
 
         function obtenerDatos(estado) {
             $.ajax({
-                url:'<?php base_url() ?>cMateriales/obtenerMaterialesPorEstado/' + estado,
+                url:'<?php base_url() ?>cEquipos/obtenerEquiposPorEstado/' + estado,
                 type:"POST",            
                 success:function(respuesta){
                     respuesta = JSON.parse(respuesta);
@@ -96,9 +98,11 @@
                         var  fila = tabla.row.add([
                             item['id'], //Una celda
                             item['descripcion'],
-                            item['cantidadExistencia'],
+                            item['numInventario'],
+                            item['serie'],
+                            item['resguardo'],
                             ac,
-                            "<a href='#' class='editarMaterial' data-id="+item['id']+" ><span class='fa fa-edit' style='font-size: 2.3em;color: #264d78;'></span></a>&nbsp;&nbsp;&nbsp;&nbsp;"+varStatus+'&nbsp;&nbsp;&nbsp;&nbsp;'
+                            "<a href='#' class='editarEquipo' data-id="+item['id']+" ><span class='fa fa-edit' style='font-size: 2.3em;color: #264d78;'></span></a>&nbsp;&nbsp;&nbsp;&nbsp;"+varStatus+'&nbsp;&nbsp;&nbsp;&nbsp;'
                         ]).draw(false).node();
                         $('td:eq(0)',fila).attr('id', item['id']);
                     });
@@ -116,14 +120,14 @@
             var msg = "";
             if (actualado == '1') {
                 actualado = 0;
-                msg ="<br><br> <strong>Nota:</strong> A dar de baja un material, no se que poner";
+                msg ="<br><br> <strong>Nota:</strong> A dar de baja un equipo, no se que poner";
             }
             else{
                 actualado = 1;
             }
             BootstrapDialog.confirm({
                 title: 'Advertencia',
-                message: 'Se cambiará el estatus del material ¿Desea continuar?'+msg,
+                message: 'Se cambiará el estatus del equipo ¿Desea continuar?'+msg,
                 type: BootstrapDialog.TYPE_DANGER, 
                 btnCancelLabel: 'Cancelar', 
                 btnOKLabel: 'Continuar', 
@@ -131,7 +135,7 @@
                 callback: function(result) {
                     if(result){
                         $.ajax({
-                            url:"<?php base_url() ?>cMateriales/cambiarEstatusMaterial/",
+                            url:"<?php base_url() ?>cEquipos/cambiarEstatusEquipo/",
                             type:"POST",
                             data: {
                                 id: actualid,
@@ -145,7 +149,7 @@
                                 else{
                                     BootstrapDialog.show({
                                         title: 'No se actualizó',
-                                        message: 'No se modificó el estatus del material seleccionado'
+                                        message: 'No se modificó el estatus del equipo seleccionado'
                                     });
                                 }
                             },
@@ -158,11 +162,11 @@
             });
         });
 
-        $('#contenidoTabla').delegate(".editarMaterial","click", function() {
+        $('#contenidoTabla').delegate(".editarEquipo","click", function() {
             var dodo = $(this); //Acceder al contenido de la etiqueta 'a'
             var actualid = dodo.data('id');
             BootstrapDialog.show({
-                title: 'Editar material', // Aquí se pone el título
+                title: 'Editar Equipo', // Aquí se pone el título
                 size: BootstrapDialog.SIZE_WIDE, //Indica el tamaño
                 message: function(dialog) { 
                     var $message = $('<div></div>');
@@ -171,7 +175,7 @@
                     return $message;
                 },
                 data: {
-                    'pageToLoad':'<?php base_url() ?>cMateriales/formularioMateriales/'+actualid
+                    'pageToLoad':'<?php base_url() ?>cEquipos/formularioEquipos/'+actualid
                 },
                 buttons: [
                     { //agrega los botones del modal
@@ -187,14 +191,19 @@
                         action: function(dialogItself) { // Funciones del boton del modal. El atributo es obligatorio para cerrarlo
                       	    //Obtendremos la informacion desde php que contiene el formulario
                       	    var descripcionViejo = $("#txtDescripcion").data('info');
-                      	    var cantidadExistenciaViejo = $("#txtCantidadExistencia").data('info');
+                            var numInventarioViejo = $("#txtNumInv").data('info');
+                            var serieViejo = $("#txtSerie").data('info');
+                            var resguardoViejo = $("#txtResguardo").data('info');
                             var categoriaViejo = $("#cmbCategorias").data('info');
-                      	    var descripcion = $("#txtDescripcion").val();
-                            var cantidadExistencia = $("#txtCantidadExistencia").val();
+
+                            var descripcion = $("#txtDescripcion").val();
+                            var numInventario = $("#txtNumInv").val();
+                            var serie = $("#txtSerie").val();
+                            var resguardo = $("#txtResguardo").val();
                             var categoria = $("#cmbCategorias").val();
                       	    var id = $("#txtDescripcion").data('id');
                       	    //Terminamos de obtener la informacion desde php
-                          	if(descripcion != descripcionViejo || cantidadExistenciaViejo != cantidadExistencia){
+                          	if(descripcion != descripcionViejo || numInventarioViejo != numInventario || serieViejo != serie || resguardoViejo != resguardo){
                           		BootstrapDialog.confirm({
         				            title: 'Información',
         				            message: 'El siguiente material va ser modificado ¿Desea continuar?',
@@ -207,7 +216,7 @@
         				            		var formData = new FormData($('#formulario')[0]);
         		                    		formData.append('id', id);
         				                    $.ajax({
-        				                        url:"<?php base_url() ?>cMateriales/editarMaterial",
+        				                        url:"<?php base_url() ?>cEquipos/editarEquipo",
         				                        type:"POST",
         				                        data:formData,
         				                        cache:false,
@@ -226,13 +235,13 @@
         				                                        message: 'Ups ah surgido un error. Recargar la pagina'
         				                                    });
         				                                    break;
-        				                                case 2: 
+        				                                /* case 2: 
                                                             BootstrapDialog.alert({
                                                                 title: 'Error',
                                                                 message: 'El nombre '+$('#txtDescripcion').val()+' ya existe. Por favor, ingrese uno diferente'
                                                             });
                                                             $('#txtDescripcion').val('');
-        				                                    break; 
+        				                                    break; */
             				                            default :
             				                                $('#msg-error').show();
             				                                $('.list-errors').html(respuesta);
@@ -260,9 +269,9 @@
             });
         });
 
-        $('#agregarMaterial').click(function(){
+        $('#agregarEquipo').click(function(){
             BootstrapDialog.show({
-                title: 'Nuevo Material', 
+                title: 'Nuevo Equipo', 
                 size: BootstrapDialog.SIZE_WIDE, 
                 message: function(dialog) { 
                     var $message = $('<div></div>');
@@ -271,7 +280,7 @@
                     return $message;
                 },
                 data: {
-                    'pageToLoad': '<?php base_url() ?>cMateriales/formularioMateriales'
+                    'pageToLoad': '<?php base_url() ?>cEquipos/formularioEquipos'
                 },
                 buttons: [
                     { 
@@ -287,7 +296,7 @@
                         action: function(dialogItself) { 
                             var formData = new FormData($('#formulario')[0]);                    
                             $.ajax({
-                                url:"<?php base_url() ?>cMateriales/agregarMateriales",
+                                url:"<?php base_url() ?>cEquipos/agregarEquipo",
                                 type:"POST",
                                 data:formData,
                                 cache:false,
